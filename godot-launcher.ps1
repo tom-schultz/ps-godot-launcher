@@ -15,13 +15,14 @@ foreach ($feature in $features)
 }
 
 if ($version -ne $null) {
-    Write-Output "Found Godot version $feature!"
-    $editor = "C:\gamedev\godot\installs\$version.lnk"
+    Write-Output "Found Godot version $version!"
+    $editor = "$PSScriptRoot\$version.lnk"
     Write-Output "Launching Godot at $editor"
     $sh = New-Object -ComObject WScript.Shell
     $target = $sh.CreateShortcut($editor).TargetPath
     Start-Process -FilePath $target -ArgumentList "--editor", "--path", $project_dir
 } else {
     Write-Output "Could not find a shortcut for Godot version $version!"
-    Start-Sleep -Seconds 10
 }
+
+Exit
